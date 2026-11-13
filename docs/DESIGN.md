@@ -401,3 +401,12 @@ Core (architect-owned, do not edit): `index.html`, `package.json`, `vite.config.
   exits non-zero on any page error. Several `out.png "query"` pairs share one browser.
   `shot=0` in the query captures the normal interactive page (title screen, HUD); add `--delay=<ms>` to wait after ready.
 - URL parameters work the same in the dev server (`?view=cedar&debug=1`).
+
+### GitHub Pages deployment
+
+- In the repository's **Settings → Pages → Build and deployment**, set **Source** to **GitHub Actions**.
+- `.github/workflows/deploy-pages.yml` builds and deploys on pushes to `master`; **Actions → Deploy to GitHub Pages →
+  Run workflow** also starts a deployment manually.
+- The workflow uses Node.js 24, `npm ci`, and `npm run build`, then publishes `dist/` to the `github-pages` environment.
+  Its deployment URL appears in the workflow run.
+- Keep Vite's `base: './'`: relative asset URLs support both the repository subpath and a custom domain.
